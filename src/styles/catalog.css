@@ -1,0 +1,61 @@
+/* Catalog Page Styles */
+.catalog-header {
+  background-color: var(--primary);
+  color: white;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.catalog-header h1 {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.catalog-header p {
+  color: #dcd6d0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.catalog-section {
+  padding: 60px 0;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 10px 24px;
+  border-radius: 30px;
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  color: var(--text-dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filter-btn.active {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px;
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius-md);
+  border: 1px dashed var(--border-color);
+}

@@ -1,0 +1,112 @@
+/* Checkout Page Styles */
+.checkout-section {
+  padding: 60px 0;
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.checkout-form-panel {
+  background-color: var(--bg-white);
+  padding: 40px;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+}
+
+.checkout-form-panel h2 {
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  color: var(--primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+}
+
+.checkout-summary-panel {
+  background-color: var(--bg-cream);
+  padding: 40px;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+}
+
+.checkout-summary-panel h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: var(--primary);
+}
+
+.checkout-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--border-color);
+  font-size: 0.95rem;
+}
+
+.checkout-item-name {
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.checkout-item-qty {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-left: 8px;
+}
+
+.checkout-item-price {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.checkout-status-card {
+  max-width: 600px;
+  margin: 80px auto;
+  text-align: center;
+  padding: 50px 40px;
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+}
+
+.checkout-status-card h1 {
+  font-size: 2.2rem;
+  margin-bottom: 16px;
+}
+
+.checkout-status-card p {
+  color: var(--text-muted);
+  margin-bottom: 30px;
+  font-size: 1.05rem;
+}
+
+.success-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  background-color: rgba(62, 92, 70, 0.1);
+  color: var(--success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.cancel-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  background-color: rgba(168, 66, 66, 0.1);
+  color: var(--error);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
