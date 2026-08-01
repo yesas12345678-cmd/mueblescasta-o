@@ -59,7 +59,43 @@ export default async function ProductPage({ params }) {
       'priceCurrency': 'EUR',
       'price': product.price.toFixed(2),
       'availability': product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-      'priceValidUntil': '2027-12-31'
+      'priceValidUntil': '2027-12-31',
+      'validFrom': '2026-01-01T00:00:00Z',
+      'hasMerchantReturnPolicy': {
+        '@type': 'MerchantReturnPolicy',
+        'applicableCountry': 'ES',
+        'returnPolicyCategory': 'https://schema.org/MerchantReturnFiniteReturnWindow',
+        'merchantReturnDays': 14,
+        'returnMethod': 'https://schema.org/ReturnByMail',
+        'returnFees': 'https://schema.org/ReturnFeesCustomerPaying'
+      },
+      'shippingDetails': {
+        '@type': 'OfferShippingDetails',
+        'shippingDestination': {
+          '@type': 'DefinedRegion',
+          'addressCountry': 'ES'
+        },
+        'shippingRate': {
+          '@type': 'MonetaryAmount',
+          'value': 0,
+          'currency': 'EUR'
+        },
+        'deliveryTime': {
+          '@type': 'ShippingDeliveryTime',
+          'handlingTime': {
+            '@type': 'QuantitativeValue',
+            'minValue': 1,
+            'maxValue': 3,
+            'unitCode': 'DAY'
+          },
+          'transitTime': {
+            '@type': 'QuantitativeValue',
+            'minValue': 3,
+            'maxValue': 7,
+            'unitCode': 'DAY'
+          }
+        }
+      }
     }
   };
 
