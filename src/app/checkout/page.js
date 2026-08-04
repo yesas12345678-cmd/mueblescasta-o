@@ -109,7 +109,6 @@ export default function CheckoutPage() {
               type="text"
               id="chk-name"
               required
-              placeholder="Ej. Juan Pérez Gómez"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             />
@@ -125,7 +124,6 @@ export default function CheckoutPage() {
                 type="email"
                 id="chk-email"
                 required
-                placeholder="juan@correo.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
@@ -139,7 +137,6 @@ export default function CheckoutPage() {
                 type="tel"
                 id="chk-phone"
                 required
-                placeholder="600123456"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               />
@@ -155,7 +152,6 @@ export default function CheckoutPage() {
               type="text"
               id="chk-address"
               required
-              placeholder="Calle, número, piso y puerta"
               value={formData.address}
               onChange={(e) => setFormData({ ...formData, address: e.target.value })}
             />
@@ -171,7 +167,6 @@ export default function CheckoutPage() {
                 type="text"
                 id="chk-zip"
                 required
-                placeholder="18830"
                 value={formData.zip}
                 onChange={(e) => setFormData({ ...formData, zip: e.target.value })}
               />

@@ -98,7 +98,8 @@ export default function Home() {
               Muebles <br/><span className="highlight">Castaño</span>
             </h1>
             <p className="hero-desc animated-fade-in-delay">
-              Calidad, diseño y funcionalidad para crear espacios que reflejan tu estilo.
+              Calidad, diseño y funcionalidad para <br />
+              crear espacios que reflejan tu estilo.
             </p>
             <div className="hero-actions animated-slide-up-delay">
               <Link href="/catalogo" className="btn btn-primary hero-btn">
