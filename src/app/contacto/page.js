@@ -74,16 +74,39 @@ export default function ContactPage() {
 
           {/* Interactive Map */}
           <h2 style={{ fontSize: '2rem', marginBottom: '24px', textAlign: 'center' }}>¿Cómo llegar?</h2>
-          <div className="map-container">
+          <div className="map-container" style={{ marginBottom: '16px' }}>
             <iframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-2.5447%2C37.8080%2C-2.5355%2C37.8130&layer=mapnik&marker=37.8105%2C-2.5401"
+              src="https://maps.google.com/maps?q=Muebles%20Casta%C3%B1o,%20Calle%20Mayor%2015,%2018830%20Hu%C3%A9scar,%20Granada&t=&z=16&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="100%"
-              style={{ border: 0 }}
+              style={{ border: 0, borderRadius: 'var(--border-radius-md)' }}
               allowFullScreen=""
               loading="lazy"
-              title="Ubicación de Muebles Castaño en Huéscar"
+              title="Ubicación de Muebles Castaño en Google Maps"
             ></iframe>
+          </div>
+          
+          <div className="map-actions" style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginBottom: '40px' }}>
+            <a 
+              href="https://maps.google.com/?q=Muebles+Castaño,+Calle+Mayor+15,+Huéscar,+Granada" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn btn-secondary"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 20px', fontSize: '0.9rem' }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+              Ampliar Mapa
+            </a>
+            <a 
+              href="https://www.google.com/maps/dir/?api=1&destination=Muebles+Castaño,+Calle+Mayor+15,+Huéscar,+Granada" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn btn-primary"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '10px 20px', fontSize: '0.9rem', backgroundColor: 'var(--accent)', color: 'white' }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+              Cómo Llegar
+            </a>
           </div>
         </div>
       </section>
