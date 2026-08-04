@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  background-color: #14110f; /* Evita destellos blancos durante la carga */
 }
 
 .hero-background-wrapper {
@@ -20,17 +21,18 @@
 
 .hero-bg-img {
   object-fit: cover;
-  animation: scaleBackground 5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scaleBackground 4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
 }
 
 @keyframes scaleBackground {
   from {
-    transform: scale(1.38);
-    filter: blur(16px) brightness(0.5);
+    transform: scale(1.22);
+    opacity: 0;
   }
   to {
-    transform: scale(1.05);
-    filter: blur(0) brightness(1);
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
@@ -380,68 +382,70 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    filter: blur(8px);
-    transform: translateY(40px);
+    transform: translate3d(0, 30px, 0);
   }
   to {
     opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes fadeInUpHeavy {
   from {
     opacity: 0;
-    transform: translateY(140px) rotateX(20deg) scale(0.85);
-    filter: blur(15px);
+    transform: translate3d(0, 110px, 0) rotateX(15deg) scale(0.92);
   }
   to {
     opacity: 1;
-    transform: translateY(0) rotateX(0) scale(1);
-    filter: blur(0);
+    transform: translate3d(0, 0, 0) rotateX(0) scale(1);
   }
 }
 
 @keyframes slideInLeftHeavy {
   from {
     opacity: 0;
-    transform: translateX(-160px) rotateY(-25deg);
-    letter-spacing: 24px;
-    filter: blur(10px);
+    transform: translate3d(-120px, 0, 0) rotateY(-20deg);
+    letter-spacing: 20px;
   }
   to {
     opacity: 1;
-    transform: translateX(0) rotateY(0);
+    transform: translate3d(0, 0, 0) rotateY(0);
     letter-spacing: 5px;
-    filter: blur(0);
   }
 }
 
 @keyframes slideInUpBar {
   from {
-    transform: translateY(100%);
+    transform: translate3d(0, 100%, 0);
     opacity: 0;
   }
   to {
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
 /* Animation Classes */
 .animated-fade-in {
-  animation: slideInLeftHeavy 2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  animation: slideInLeftHeavy 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .animated-slide-up {
-  animation: fadeInUpHeavy 2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  animation: fadeInUpHeavy 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .animated-fade-in-delay {
-  animation: fadeIn 2s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+  animation: fadeIn 1.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .animated-slide-up-delay {
-  animation: fadeInUpHeavy 2s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+  animation: fadeInUpHeavy 1.8s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }

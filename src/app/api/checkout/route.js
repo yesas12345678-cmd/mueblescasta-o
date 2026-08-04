@@ -80,6 +80,8 @@ export async function POST(request) {
 
     const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
     const origin = request.headers.get('origin') || 'https://mueblescastano.com';
+    const isLocalhost = origin.includes('localhost') || origin.includes('127.0.0.1');
+    const isProd = process.env.NODE_ENV === 'production' && !isLocalhost;
 
     // 3. REGISTRAR PEDIDO EN BASE DE DATOS (SI ESTÁ CONFIGURADA)
     const hasDb = !!process.env.DATABASE_URL;
@@ -136,7 +138,7 @@ export async function POST(request) {
       } finally {
         client.release();
       }
-    } else if (process.env.NODE_ENV === 'production') {
+    } else if (isProd) {
       console.error('ERROR SEGURIDAD: DATABASE_URL no está configurada en producción.');
       return NextResponse.json(
         { error: 'Error de configuración en el servidor.' },
@@ -146,7 +148,7 @@ export async function POST(request) {
 
     // 4. SEGURIDAD: SI NO HAY CLAVE DE STRIPE, PREVENIR ACCESO GRATUITO EN PRODUCCIÓN
     if (!stripeSecretKey) {
-      if (process.env.NODE_ENV === 'production') {
+      if (isProd) {
         console.error('ERROR SEGURIDAD: Se intentó realizar un pago pero STRIPE_SECRET_KEY no está configurada.');
         return NextResponse.json(
           { error: 'El servicio de pago no está configurado correctamente en el servidor. Contacte con soporte.' },

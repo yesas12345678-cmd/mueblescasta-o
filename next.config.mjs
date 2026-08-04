@@ -26,11 +26,33 @@ const nextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
           },
+        ],
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
           {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload',
+            type: 'host',
+            value: 'www.xn--mueblescastao-tkb.com',
           },
         ],
+        destination: 'http://xn--mueblescastao-tkb.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'www.mueblescastaño.com',
+          },
+        ],
+        destination: 'http://mueblescastaño.com/:path*',
+        permanent: true,
       },
     ];
   },
