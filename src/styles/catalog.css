@@ -2,7 +2,7 @@
 .catalog-header {
   background-color: var(--primary);
   color: white;
-  padding: 60px 0;
+  padding: 140px 0 60px;
   text-align: center;
 }
 

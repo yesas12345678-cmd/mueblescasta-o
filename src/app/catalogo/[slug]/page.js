@@ -2,10 +2,22 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { productos } from '@/data/productos';
+import { query } from '@/utils/db';
 import ProductDetailActions from '@/components/ProductDetailActions';
 import '@/styles/product-detail.css';
 
 export async function generateStaticParams() {
+  const hasDb = !!process.env.DATABASE_URL;
+  if (hasDb) {
+    try {
+      const result = await query('SELECT slug FROM productos');
+      return result.rows.map((row) => ({
+        slug: row.slug,
+      }));
+    } catch (e) {
+      console.error('Error al generar parámetros estáticos de productos:', e);
+    }
+  }
   return productos.map((product) => ({
     slug: product.slug,
   }));
@@ -13,7 +25,35 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const product = productos.find((p) => p.slug === slug);
+  let product;
+  const hasDb = !!process.env.DATABASE_URL;
+  
+  if (hasDb) {
+    try {
+      const result = await query('SELECT * FROM productos WHERE slug = $1', [slug]);
+      if (result.rows.length > 0) {
+        const row = result.rows[0];
+        product = {
+          id: row.id,
+          name: row.name,
+          slug: row.slug,
+          description: row.description,
+          price: parseFloat(row.price),
+          category: row.category,
+          image: row.image,
+          features: Array.isArray(row.features) ? row.features : [],
+          dimensions: row.dimensions,
+          stock: parseInt(row.stock, 10),
+        };
+      }
+    } catch (e) {
+      console.error('Error al obtener metadatos de producto desde BD:', e);
+    }
+  }
+  
+  if (!product) {
+    product = productos.find((p) => p.slug === slug);
+  }
 
   if (!product) {
     return {
@@ -35,7 +75,35 @@ export async function generateMetadata({ params }) {
 
 export default async function ProductPage({ params }) {
   const { slug } = await params;
-  const product = productos.find((p) => p.slug === slug);
+  let product;
+  const hasDb = !!process.env.DATABASE_URL;
+  
+  if (hasDb) {
+    try {
+      const result = await query('SELECT * FROM productos WHERE slug = $1', [slug]);
+      if (result.rows.length > 0) {
+        const row = result.rows[0];
+        product = {
+          id: row.id,
+          name: row.name,
+          slug: row.slug,
+          description: row.description,
+          price: parseFloat(row.price),
+          category: row.category,
+          image: row.image,
+          features: Array.isArray(row.features) ? row.features : [],
+          dimensions: row.dimensions,
+          stock: parseInt(row.stock, 10),
+        };
+      }
+    } catch (e) {
+      console.error('Error al obtener el producto en detalle desde BD:', e);
+    }
+  }
+  
+  if (!product) {
+    product = productos.find((p) => p.slug === slug);
+  }
 
   if (!product) {
     notFound();

@@ -1,4 +1,5 @@
-import { productos } from '@/data/productos';
+import { productos as staticProducts } from '@/data/productos';
+import { query } from '@/utils/db';
 import CatalogList from '@/components/CatalogList';
 import '@/styles/catalog.css';
 
@@ -15,7 +16,30 @@ export const metadata = {
   ],
 };
 
-export default function CatalogPage() {
+export default async function CatalogPage() {
+  let productsList = staticProducts;
+  const hasDb = !!process.env.DATABASE_URL;
+
+  if (hasDb) {
+    try {
+      const result = await query('SELECT * FROM productos ORDER BY id ASC');
+      productsList = result.rows.map((row) => ({
+        id: row.id,
+        name: row.name,
+        slug: row.slug,
+        description: row.description,
+        price: parseFloat(row.price),
+        category: row.category,
+        image: row.image,
+        features: Array.isArray(row.features) ? row.features : [],
+        dimensions: row.dimensions,
+        stock: parseInt(row.stock, 10),
+      }));
+    } catch (error) {
+      console.error('Error al cargar productos de PostgreSQL para catálogo:', error);
+    }
+  }
+
   return (
     <>
       <div className="catalog-header">
@@ -26,7 +50,7 @@ export default function CatalogPage() {
           </p>
         </div>
       </div>
-      <CatalogList initialProducts={productos} />
+      <CatalogList initialProducts={productsList} />
     </>
   );
 }

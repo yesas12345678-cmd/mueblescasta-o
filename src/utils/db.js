@@ -15,10 +15,11 @@ if (!pool) {
   // Configuración de SSL para servicios en la nube (como Supabase/Neon)
   const isProduction = process.env.NODE_ENV === 'production';
   const hasSqlmodeRequire = connectionString && connectionString.includes('sslmode=require');
+  const hasSqlmodeDisable = connectionString && connectionString.includes('sslmode=disable');
   
   pool = new Pool({
     connectionString,
-    ssl: isProduction || hasSqlmodeRequire
+    ssl: (isProduction && !hasSqlmodeDisable) || hasSqlmodeRequire
       ? { rejectUnauthorized: false }
       : false,
   });
