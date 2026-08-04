@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { useState, useEffect } from 'react';
@@ -32,26 +33,16 @@ export default function Header() {
   return (
     <header className={headerClass}>
       <div className="container header-container">
-        {/* Logotipo Vectorial Premium */}
-        <Link href="/" className="header-logo">
-          <div className="logo-icon-wrapper">
-            <svg viewBox="0 0 100 100" className="logo-icon-svg" fill="none" stroke="currentColor" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="15" y="15" width="70" height="70" rx="8" />
-              <path d="M30 40 L30 60" />
-              <path d="M70 40 L70 60" />
-              <path d="M30 40 Q50 35 70 40" />
-              <path d="M25 60 L75 60" />
-              <path d="M25 60 L25 72 Q50 74 75 72 L75 60" />
-              <path d="M20 54 L20 62 C20 66 25 66 25 66" />
-              <path d="M80 54 L80 62 C80 66 75 66 75 66" />
-              <path d="M32 72 L28 82" />
-              <path d="M68 72 L72 82" />
-            </svg>
-          </div>
-          <div className="logo-text-wrapper">
-            <span className="logo-sub">MUEBLES</span>
-            <span className="logo-main">CASTAÑO</span>
-          </div>
+        {/* Logotipo Original */}
+        <Link href="/" className="logo-image-container">
+          <Image
+            src="/images/logo.png"
+            alt="Logo Muebles Castaño"
+            width={140}
+            height={46}
+            className="header-logo-image"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}
