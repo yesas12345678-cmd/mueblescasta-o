@@ -42,7 +42,7 @@
 .header-logo-image {
   object-fit: contain;
   width: auto;
-  height: 40px;
+  height: 54px; /* Aumentado de 40px a 54px para que sea más grande y claro */
   filter: brightness(0) invert(1); /* Hacemos el logo blanco para contrastar con el fondo oscuro y transparente */
   transition: var(--transition);
 }

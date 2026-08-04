@@ -38,8 +38,8 @@ export default function Header() {
           <Image
             src="/images/logo.png"
             alt="Logo Muebles Castaño"
-            width={140}
-            height={46}
+            width={165}
+            height={54}
             className="header-logo-image"
             priority
           />
