@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -87,6 +89,14 @@ export default function Footer() {
             <Link href="/aviso-legal" style={{ color: '#a69b93' }}>Aviso Legal</Link>
             <Link href="/politica-privacidad" style={{ color: '#a69b93' }}>Política de Privacidad</Link>
             <Link href="/politica-cookies" style={{ color: '#a69b93' }}>Política de Cookies</Link>
+            <button 
+              onClick={() => window.dispatchEvent(new Event('open-cookie-settings'))}
+              style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: '#a69b93', fontFamily: 'inherit', fontSize: 'inherit', transition: 'var(--transition)' }}
+              onMouseOver={(e) => e.currentTarget.style.color = 'var(--accent)'}
+              onMouseOut={(e) => e.currentTarget.style.color = '#a69b93'}
+            >
+              Configuración de Cookies
+            </button>
           </div>
           <p>
             Diseñado para el mejor posicionamiento SEO en Huéscar y el Altiplano de Granada.

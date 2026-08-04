@@ -492,3 +492,195 @@
     justify-content: flex-end;
   }
 }
+
+/* Cookie Banner Settings Modal & Switches */
+.cookie-config-modal {
+  background-color: rgba(44, 37, 32, 0.98); /* Tono marrón oscuro premium */
+  border: 1px solid rgba(229, 223, 218, 0.15);
+  border-radius: var(--border-radius-lg);
+  padding: 30px;
+  max-width: 550px;
+  width: 100%;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cookie-config-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 12px;
+}
+
+.cookie-config-header h3 {
+  font-size: 1.3rem;
+  color: #ffffff;
+  font-family: var(--font-serif);
+}
+
+.cookie-config-close {
+  background: none;
+  border: none;
+  color: #a69b93;
+  font-size: 1.8rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: var(--transition);
+}
+
+.cookie-config-close:hover {
+  color: #ffffff;
+}
+
+.cookie-config-body {
+  max-height: 320px;
+  overflow-y: auto;
+  padding-right: 8px;
+  margin-bottom: 24px;
+}
+
+/* Custom scrollbar para la configuración */
+.cookie-config-body::-webkit-scrollbar {
+  width: 6px;
+}
+.cookie-config-body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+.cookie-config-body::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+}
+
+.cookie-config-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cookie-config-info h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 4px;
+  font-family: var(--font-sans);
+}
+
+.cookie-config-info p {
+  font-size: 0.8rem;
+  color: #a69b93;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Switches para Toggles */
+.cookie-switch-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cookie-switch-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.cookie-switch-label {
+  display: block;
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.15);
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cookie-switch-label::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  transition: transform 0.3s;
+}
+
+.cookie-switch-input:checked + .cookie-switch-label {
+  background-color: var(--accent);
+}
+
+.cookie-switch-input:checked + .cookie-switch-label::after {
+  transform: translateX(20px);
+}
+
+.cookie-switch-label.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cookie-config-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 16px;
+}
+
+.cookie-btn-configure {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cookie-btn-configure:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: #ffffff;
+}
+
+/* Estilos de Formularios Globales (para solucionar el enter entre campo y etiqueta en el checkout) */
+.form-group {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column; /* Coloca la etiqueta y el input en líneas diferentes (un enter de por medio) */
+  align-items: flex-start;
+  width: 100%;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-cream);
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  transition: var(--transition);
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--accent);
+  background-color: var(--bg-white);
+  box-shadow: 0 0 0 2px rgba(197, 168, 128, 0.15);
+}
