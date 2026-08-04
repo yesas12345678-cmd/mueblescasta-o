@@ -79,8 +79,23 @@ export async function POST(request) {
     }
 
     const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
-    const origin = request.headers.get('origin') || 'https://mueblescastano.com';
-    const isLocalhost = origin.includes('localhost') || origin.includes('127.0.0.1');
+    const origin = request.headers.get('origin') || '';
+    const host = request.headers.get('host') || '';
+    const referer = request.headers.get('referer') || '';
+    const hostname = request.nextUrl?.hostname || '';
+
+    const isLocalhost = 
+      hostname === 'localhost' || 
+      hostname === '127.0.0.1' || 
+      hostname.startsWith('192.168.') || 
+      hostname.startsWith('10.') ||
+      origin.includes('localhost') || 
+      origin.includes('127.0.0.1') ||
+      host.includes('localhost') || 
+      host.includes('127.0.0.1') ||
+      referer.includes('localhost') || 
+      referer.includes('127.0.0.1');
+
     const isProd = process.env.NODE_ENV === 'production' && !isLocalhost;
 
     // 3. REGISTRAR PEDIDO EN BASE DE DATOS (SI ESTÁ CONFIGURADA)

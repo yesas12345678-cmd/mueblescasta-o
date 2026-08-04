@@ -110,3 +110,21 @@
   justify-content: center;
   margin: 0 auto 24px;
 }
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.summary-row.total {
+  font-weight: 700;
+  font-size: 1.15rem;
+  border-top: 2px solid var(--border-color);
+  padding-top: 16px;
+  margin-top: 8px;
+  color: var(--primary);
+}
