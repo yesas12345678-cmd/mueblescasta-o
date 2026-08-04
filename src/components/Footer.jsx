@@ -83,6 +83,11 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} Muebles Castaño. Todos los derechos reservados.</p>
+          <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', margin: '12px 0 16px', flexWrap: 'wrap', fontSize: '0.85rem' }}>
+            <Link href="/aviso-legal" style={{ color: '#a69b93' }}>Aviso Legal</Link>
+            <Link href="/politica-privacidad" style={{ color: '#a69b93' }}>Política de Privacidad</Link>
+            <Link href="/politica-cookies" style={{ color: '#a69b93' }}>Política de Cookies</Link>
+          </div>
           <p>
             Diseñado para el mejor posicionamiento SEO en Huéscar y el Altiplano de Granada.
           </p>

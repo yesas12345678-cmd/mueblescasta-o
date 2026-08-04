@@ -1,30 +1,57 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Header() {
   const pathname = usePathname();
   const { cartCount } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const isActive = (path) => pathname === path;
+  const isHome = pathname === '/';
+
+  // Detectar scroll para cambiar el fondo de la cabecera
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const headerClass = `header ${isHome && !scrolled ? 'header-home-transparent' : ''} ${scrolled ? 'scrolled' : ''}`;
 
   return (
-    <header className="header">
+    <header className={headerClass}>
       <div className="container header-container">
-        <Link href="/" className="logo" style={{ display: 'flex', alignItems: 'center' }}>
-          <Image
-            src="/images/logo.png"
-            alt="Logo Muebles Castaño"
-            width={140}
-            height={46}
-            style={{ objectFit: 'contain' }}
-            priority
-          />
+        {/* Logotipo Vectorial Premium */}
+        <Link href="/" className="header-logo">
+          <div className="logo-icon-wrapper">
+            <svg viewBox="0 0 100 100" className="logo-icon-svg" fill="none" stroke="currentColor" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="15" y="15" width="70" height="70" rx="8" />
+              <path d="M30 40 L30 60" />
+              <path d="M70 40 L70 60" />
+              <path d="M30 40 Q50 35 70 40" />
+              <path d="M25 60 L75 60" />
+              <path d="M25 60 L25 72 Q50 74 75 72 L75 60" />
+              <path d="M20 54 L20 62 C20 66 25 66 25 66" />
+              <path d="M80 54 L80 62 C80 66 75 66 75 66" />
+              <path d="M32 72 L28 82" />
+              <path d="M68 72 L72 82" />
+            </svg>
+          </div>
+          <div className="logo-text-wrapper">
+            <span className="logo-sub">MUEBLES</span>
+            <span className="logo-main">CASTAÑO</span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
@@ -33,6 +60,11 @@ export default function Header() {
             <li>
               <Link href="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>
                 Inicio
+              </Link>
+            </li>
+            <li>
+              <Link href="/catalogo" className={`nav-link ${isActive('/catalogo') ? 'active' : ''}`}>
+                Colecciones
               </Link>
             </li>
             <li>
@@ -53,12 +85,14 @@ export default function Header() {
           </ul>
         </nav>
 
+        {/* Iconos de Acción */}
         <div className="header-actions">
-          <Link href="/carrito" className="cart-btn" aria-label="Ver Carrito de compra">
+          {/* Búsqueda */}
+          <button className="header-action-btn search-btn" aria-label="Buscar productos">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -66,13 +100,50 @@ export default function Header() {
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <circle cx="8" cy="21" r="1" />
-              <circle cx="19" cy="21" r="1" />
-              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+
+          {/* Mi Cuenta (Mock) */}
+          <Link href="/contacto" className="header-action-btn profile-btn" aria-label="Mi Cuenta">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </Link>
+
+          {/* Carrito de Compra */}
+          <Link href="/carrito" className="header-action-btn cart-btn" aria-label="Ver Carrito de compra">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="9" cy="21" r="1" />
+              <circle cx="20" cy="21" r="1" />
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
             </svg>
             {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
           </Link>
 
+          {/* Botón de Menú Móvil */}
           <button
             className="mobile-menu-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -97,30 +168,10 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Nav Drawer */}
+      {/* Menú Móvil */}
       {mobileMenuOpen && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '80px',
-            left: 0,
-            width: '100%',
-            backgroundColor: 'var(--bg-white)',
-            borderBottom: '1px solid var(--border-color)',
-            boxShadow: 'var(--box-shadow-hover)',
-            zIndex: 99,
-            padding: '20px 0',
-          }}
-        >
-          <ul
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '20px',
-              listStyle: 'none',
-            }}
-          >
+        <div className="mobile-menu-drawer">
+          <ul className="mobile-nav-list">
             <li>
               <Link
                 href="/"
@@ -128,6 +179,15 @@ export default function Header() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Inicio
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/catalogo"
+                className={`nav-link ${isActive('/catalogo') ? 'active' : ''}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Colecciones
               </Link>
             </li>
             <li>

@@ -6,16 +6,35 @@ export default function ContactForm() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // Simulate sending message
-    setTimeout(() => {
-      setLoading(false);
+    setError(null);
+    setSubmitted(false);
+
+    try {
+      const response = await fetch('/api/contacto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Ocurrió un error al enviar tu mensaje. Inténtalo de nuevo.');
+      }
+
       setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
-    }, 1200);
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -35,6 +54,22 @@ export default function ContactForm() {
           }}
         >
           ¡Gracias por tu mensaje! Nos pondremos en contacto contigo lo antes posible.
+        </div>
+      )}
+      {error && (
+        <div
+          style={{
+            backgroundColor: 'rgba(168, 66, 66, 0.1)',
+            border: '1px solid var(--error)',
+            color: 'var(--error)',
+            padding: '16px',
+            borderRadius: 'var(--border-radius-sm)',
+            marginBottom: '20px',
+            fontSize: '0.95rem',
+            fontWeight: '500',
+          }}
+        >
+          {error}
         </div>
       )}
 

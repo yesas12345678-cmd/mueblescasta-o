@@ -11,7 +11,7 @@ export default function SuccessPage() {
   useEffect(() => {
     // Vacíamos el carrito tras la compra exitosa
     clearCart();
-  }, []);
+  }, [clearCart]);
 
   return (
     <div className="checkout-section container">

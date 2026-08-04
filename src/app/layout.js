@@ -3,6 +3,7 @@ import '@/styles/components.css';
 import { CartProvider } from '@/context/CartContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import CookieBanner from '@/components/CookieBanner';
 
 export const metadata = {
   title: 'Muebles Castaño | Tienda de Muebles en Huéscar (Granada)',
@@ -35,6 +36,7 @@ export default function RootLayout({ children }) {
           <Header />
           <main style={{ flex: 1 }}>{children}</main>
           <Footer />
+          <CookieBanner />
         </CartProvider>
       </body>
     </html>

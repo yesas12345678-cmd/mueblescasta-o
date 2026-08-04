@@ -11,14 +11,16 @@ export function CartProvider({ children }) {
   // Load cart from localStorage on mount
   useEffect(() => {
     const savedCart = localStorage.getItem('muebles_castano_cart');
-    if (savedCart) {
-      try {
-        setCartItems(JSON.parse(savedCart));
-      } catch (e) {
-        console.error('Failed to parse cart data', e);
+    setTimeout(() => {
+      if (savedCart) {
+        try {
+          setCartItems(JSON.parse(savedCart));
+        } catch (e) {
+          console.error('Failed to parse cart data', e);
+        }
       }
-    }
-    setIsLoaded(true);
+      setIsLoaded(true);
+    }, 0);
   }, []);
 
   // Save cart to localStorage when it changes
